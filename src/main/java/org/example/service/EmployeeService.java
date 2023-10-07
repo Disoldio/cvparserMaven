@@ -26,7 +26,6 @@ public class EmployeeService {
     }
 
     public void createEmployee(File file) throws IOException, BadLocationException {
-        //парсим
         FileDataExtractor extractor = this.obtainExtractor(file);
         String text = extractor.extract(file);
 
@@ -35,20 +34,31 @@ public class EmployeeService {
         employeeStorage.save(employee);
     }
 
+    public void createEmployers (File folder) throws IOException, BadLocationException {
+
+        for (int i = 0; i < folder.listFiles().length; i++) {
+            File file = folder.listFiles()[i];
+            createEmployee(file);
+        }
+    }
+
     private FileDataExtractor obtainExtractor(File file) {
         String fileName = file.getName();
-        String extension = file.getName().substring(fileName.lastIndexOf("."), fileName.length());
+        String extension = file.getName().substring(fileName.lastIndexOf(".") + 1, fileName.length());
         SupportedType type = SupportedType.getByString(extension);
 
         switch (type) {
             case PDF:
                 return new PdfExtractor();
             case RTF:
+            case DOC:
                 return new RtfExtractor();
             case DOCX:
                 return new DocXExtractor();
         }
         throw new RuntimeException("Can't obtain extractor for file " + fileName);
     }
+
+
 
 }

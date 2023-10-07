@@ -39,24 +39,7 @@ public class EmployeeStorage implements Storage<Employee, Long> {
 
     public List<Employee> getAll(){
         String query = "select * from employers";
-        List<Employee> listEmp = new ArrayList<>();
 
-        try {
-            ResultSet result = connection.createStatement().executeQuery(query);
-            while(result.next()){
-                Employee emp = new Employee();
-                emp.setGeneralInfo(result.getString("general_info"));
-                emp.setExperience(result.getString("experience"));
-                emp.setSkills(result.getString("skills"));
-                emp.setEducation(result.getString("education"));
-                emp.setAbout(result.getString("about"));
-                emp.setSpec(result.getString("spec"));
-
-                listEmp.add(emp);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return listEmp;
+        return dao.getResult(query);
     }
 }

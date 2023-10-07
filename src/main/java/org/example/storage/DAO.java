@@ -1,9 +1,10 @@
 package org.example.storage;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import org.example.model.Employee;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DAO{
     private static  String url = "jdbc:postgresql://localhost:5432/Panelka";
@@ -36,5 +37,28 @@ public class DAO{
             throw new RuntimeException(e);
         }
 
+    }
+    public List<Employee> getResult(String sql){
+        List<Employee> listEmp = new ArrayList<>();
+
+        try {
+            ResultSet result = connection.createStatement().executeQuery(sql);
+
+            while(result.next()){
+                Employee emp = new Employee();
+                emp.setGeneralInfo(result.getString("general_info"));
+                emp.setExperience(result.getString("experience"));
+                emp.setSkills(result.getString("skills"));
+                emp.setEducation(result.getString("education"));
+                emp.setAbout(result.getString("about"));
+                emp.setSpec(result.getString("spec"));
+
+                listEmp.add(emp);
+
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return listEmp;
     }
 }

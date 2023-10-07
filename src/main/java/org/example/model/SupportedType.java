@@ -9,6 +9,7 @@ public enum SupportedType {
 
     PDF("pdf"),
     DOCX("docx"),
+    DOC("doc"),
     RTF("rtf");
 
     private final String extension;
