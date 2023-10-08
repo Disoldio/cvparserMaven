@@ -30,6 +30,8 @@ public class HhDataFiller implements DataFiller {
 
         }
 
+        emp.setGeneralInfo(text.substring(0, text.indexOf("Желаемая должность и зарплата")));
+
         for(int i = 0; i < obChel.size(); i++){
             if(obChel.get(i).indexOf("Желаемая должность и зарплата") != -1){
                 emp.setSpec(obChel.get(i));
@@ -50,10 +52,7 @@ public class HhDataFiller implements DataFiller {
                 String portfolio = obChel.get(i);
             }
         }
-        emp.setGeneralInfo(text.substring(0, text.indexOf("Желаемая должность и зарплата")));
-        System.out.println(chel.size());
-        System.out.println(obChel.size());
-        System.out.println(obChel.get(0).length());
+
         return emp;
     }
 }

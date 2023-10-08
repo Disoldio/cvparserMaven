@@ -1,5 +1,7 @@
 package org.example.storage;
 
+import org.example.DAO;
+import org.example.ResultSetProcessor;
 import org.example.model.Employee;
 
 import java.sql.*;
@@ -11,14 +13,11 @@ public class EmployeeStorage implements Storage<Employee, Long> {
     private static  String username = "postgres";
     private static  String password = "admin";
     private static Connection connection;
-    private DAO dao = DAO.getInstance();
+    private DAO dao;
 
     public EmployeeStorage() {
-        try {
-            connection = DriverManager.getConnection(url, username, password);
-        } catch (SQLException e) {
-            System.out.println("Не удалось создать подключение к базе данных!");
-        }
+        DAO.setCredentials(url, username, password);
+        this.dao = DAO.getInstance();
     }
 
 
@@ -39,7 +38,8 @@ public class EmployeeStorage implements Storage<Employee, Long> {
 
     public List<Employee> getAll(){
         String query = "select * from employers";
+        ResultSetProcessor resultSetProcessor = new EmployeeResultSetProcessor();
 
-        return dao.getResult(query);
+        return dao.execute(query, resultSetProcessor);
     }
 }

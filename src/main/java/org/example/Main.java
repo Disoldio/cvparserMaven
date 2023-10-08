@@ -5,10 +5,8 @@ import org.example.model.Position;
 import org.example.service.EmployeeService;
 import org.example.service.extractor.PdfExtractor;
 import org.example.service.extractor.RtfExtractor;
-import org.example.service.filler.HhDataFiller;
-import org.example.storage.DAO;
 import org.example.storage.EmployeeStorage;
-import org.example.storage.PositionStorage;
+//import org.example.storage.PositionStorage;
 
 import javax.swing.text.BadLocationException;
 import java.io.File;
@@ -21,25 +19,21 @@ public class Main {
         EmployeeStorage storage = new EmployeeStorage();
         Employee emp = new Employee();
         Position pos = new Position();
-        PositionStorage positionStorage = new PositionStorage();
+//        PositionStorage positionStorage = new PositionStorage();
         File file = new File("resumes/Сергеев Иван.rtf");
         EmployeeService employeeService = new EmployeeService();
-        //Loginov Anton.rtf
-        //Klishin Andrey.pdf
-        //Kulyanin Roman.rtf
 
-        //Сергеев Иван.rtf
-        //
 //        pos.setTitle("PHP-разработчик");
 //        positionStorage.save(pos);
 //        String data = rtf.extract(file);
 //        HhDataFiller hhdf = new HhDataFiller();
 //        emp = hhdf.fillData(data);
 //        storage.save(emp);
-        File file1 = new File("resumes");
-        employeeService.createEmployers(file1);
-        System.out.println();
-        System.out.println("done! :)");
 
+//        File file1 = new File("resumes");
+//        employeeService.createEmployers(file1);
+//        System.out.println();
+//        System.out.println("done! :)");
+        storage.getAll();
     }
 }
