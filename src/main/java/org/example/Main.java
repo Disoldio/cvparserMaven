@@ -5,6 +5,7 @@ import org.example.model.Position;
 import org.example.service.EmployeeService;
 import org.example.service.extractor.PdfExtractor;
 import org.example.service.extractor.RtfExtractor;
+import org.example.service.filler.HhDataFiller;
 import org.example.storage.EmployeeStorage;
 //import org.example.storage.PositionStorage;
 
@@ -30,10 +31,11 @@ public class Main {
 //        emp = hhdf.fillData(data);
 //        storage.save(emp);
 
-//        File file1 = new File("resumes");
-//        employeeService.createEmployers(file1);
+        File file1 = new File("resumes");
+        employeeService.createEmployers(file1);
 //        System.out.println();
-//        System.out.println("done! :)");
-        storage.getAll();
+        System.out.println("done! :)");
+//        storage.getAll();
+
     }
 }
